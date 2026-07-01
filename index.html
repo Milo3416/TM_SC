@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tokio Marine Mexico | CX Safari Consultivo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --genesys-orange: #ff4f1f;
+      --genesys-purple: #2d174d;
+      --tokio-navy: #101c3d;
+      --tokio-blue: #184e8e;
+      --tokio-red: #d71920;
+      --ink: #172033;
+      --muted: #5b6475;
+      --panel: #ffffff;
+      --soft: #f6f7fb;
+      --line: #e5e7eb;
+      --good: #0f766e;
+      --warn: #b45309;
+      --risk: #b91c1c;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--ink); background: #f7f8fb; }
+    .hero-gradient { background: radial-gradient(circle at 18% 10%, rgba(255,79,31,.22), transparent 28%), radial-gradient(circle at 82% 8%, rgba(24,78,142,.28), transparent 30%), linear-gradient(135deg, #081225 0%, #15234a 48%, #2d174d 83%, #ff4f1f 145%); }
+    .glass { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.18); backdrop-filter: blur(14px); }
+    .card { background: var(--panel); border: 1px solid var(--line); box-shadow: 0 18px 45px rgba(15,23,42,.06); }
+    .pill { border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.10); }
+    .section-title { letter-spacing: -.035em; }
+    .source-link { color: #4f46e5; text-decoration: underline; text-underline-offset: 3px; }
+    .accent-bar { height: 4px; background: linear-gradient(90deg, var(--genesys-orange), var(--tokio-blue), var(--genesys-purple)); border-radius: 999px; }
+    .topic-btn.active { background: var(--genesys-purple); color: white; border-color: var(--genesys-purple); }
+    .topic-panel { display: none; }
+    .topic-panel.active { display: block; animation: fadeIn .32s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .journey-step::before { content: ''; position: absolute; top: 1.15rem; left: -1rem; width: 1rem; height: 2px; background: #e5e7eb; }
+    .journey-step:first-child::before { display: none; }
+    .state-line { position: relative; }
+    .state-line::before { content: ''; position: absolute; left: 1.15rem; top: 2.75rem; bottom: -1.25rem; width: 2px; background: #e2e8f0; }
+    .state-line:last-child::before { display: none; }
+    .print-break { break-inside: avoid; }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white; }
+      .card { box-shadow: none; }
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero-gradient text-white">
+    <nav class="no-print sticky top-0 z-50 bg-[#081225]/85 backdrop-blur border-b border-white/10">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div class="font-extrabold tracking-tight">CX Safari | Tokio Marine Mexico</div>
+        <div class="hidden lg:flex gap-5 text-sm text-white/80">
+          <a href="#contexto" class="hover:text-white">Contexto</a>
+          <a href="#sesion-cliente" class="hover:text-white">Sesion inicial</a>
+          <a href="#canales" class="hover:text-white">Canales</a>
+          <a href="#journey" class="hover:text-white">Journey</a>
+          <a href="#benchmark" class="hover:text-white">Benchmark</a>
+          <a href="#brasil" class="hover:text-white">Brasil</a>
+          <a href="#estado-arte" class="hover:text-white">Estado del arte</a>
+          <a href="#fuentes" class="hover:text-white">Fuentes</a>
+        </div>
+      </div>
+    </nav>
+
+    <section class="max-w-7xl mx-auto px-6 py-20 md:py-28">
+      <div class="grid lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-7">
+          <div class="inline-flex items-center gap-2 pill rounded-full px-4 py-2 text-sm text-white/90 mb-7">
+            <span class="w-2 h-2 rounded-full bg-orange-300"></span>
+            Perspectiva consultiva desde Solution Consulting
+          </div>
+          <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
+            Tokio Marine Mexico: de operacion solida a experiencia predecible para competir
+          </h1>
+          <p class="mt-6 text-lg md:text-xl text-white/82 max-w-3xl leading-relaxed">
+            Una lectura ejecutiva de experiencia de cliente para seguros: como convertir voz, correo, portales, siniestros, agentes y datos fragmentados en un journey trazable, predecible y asistido por IA.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3 text-sm">
+            <span class="px-4 py-2 rounded-full bg-white text-[#2d174d] font-semibold">Siniestros + certeza</span>
+            <span class="px-4 py-2 rounded-full bg-white/15 border border-white/15">Voz / WhatsApp / Web Messaging</span>
+            <span class="px-4 py-2 rounded-full bg-white/15 border border-white/15">Orquestacion de journeys</span>
+            <span class="px-4 py-2 rounded-full bg-white/15 border border-white/15">Referencia Tokio Marine Brasil</span>
+          </div>
+        </div>
+        <div class="lg:col-span-5">
+          <div class="glass rounded-3xl p-7">
+            <p class="text-sm uppercase tracking-widest text-white/60 mb-4">Hipotesis ejecutiva</p>
+            <h2 class="text-2xl font-bold leading-snug">El diferenciador no es solo abrir mas canales; es volver predecible la operacion cuando Tokio Marine compite en un mercado nacional mas exigente.</h2>
+            <div class="accent-bar my-6"></div>
+            <p class="text-white/78 leading-relaxed">
+              Tokio Marine Mexico ya comunica fortaleza global, calidad japonesa y capacidad operativa. La oportunidad visible esta en convertir multiples puntos de contacto - voz, correo, UNE, siniestros, sucursales, portales y Salesforce - en una experiencia unica, contextual y medible para asegurados, agentes y brokers.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section id="contexto" class="max-w-7xl mx-auto px-6 py-16">
+      <div class="grid lg:grid-cols-12 gap-8 items-start">
+        <div class="lg:col-span-5">
+          <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">01 / Contexto</p>
+          <h2 class="section-title text-3xl md:text-5xl font-extrabold mt-3">Tokio Marine no parte de cero: parte de una marca global, una operacion mexicana en relanzamiento y una urgencia interna de transformacion.</h2>
+          <p class="mt-5 text-slate-600 leading-relaxed">
+            Tokio Marine Mexico se presenta como integrante de Tokio Marine Holdings, con una narrativa de confianza, calidad japonesa y crecimiento por nichos de mercado. El relanzamiento en Mexico abre una ventana para hablar de transformacion: no solo mejorar atencion, sino preparar una operacion mas cercana al mercado nacional, mas predecible para agentes y escalable para el futuro.
+          </p>
+        </div>
+        <div class="lg:col-span-7 grid md:grid-cols-2 gap-5">
+          <div class="card rounded-3xl p-6 print-break">
+            <div class="text-4xl font-extrabold text-[#184e8e]">56</div>
+            <p class="font-semibold mt-2">paises y regiones</p>
+            <p class="text-sm text-slate-600 mt-2">El Integrated Annual Report 2025 describe la escala global del grupo Tokio Marine.</p>
+          </div>
+          <div class="card rounded-3xl p-6 print-break">
+            <div class="text-4xl font-extrabold text-[#ff4f1f]">CX3</div>
+            <p class="font-semibold mt-2">referencia regional en Brasil</p>
+            <p class="text-sm text-slate-600 mt-2">Tokio Marine Brasil opera Genesys Cloud CX3 con 1,000 licencias y 80% de adopcion reportada internamente.</p>
+          </div>
+          <div class="card rounded-3xl p-6 print-break">
+            <div class="text-4xl font-extrabold text-[#0f766e]">24/7</div>
+            <p class="font-semibold mt-2">siniestros visibles</p>
+            <p class="text-sm text-slate-600 mt-2">El sitio de Tokio Marine Mexico publica atencion de siniestros y canales de contacto para atencion inmediata.</p>
+          </div>
+          <div class="card rounded-3xl p-6 print-break">
+            <div class="text-4xl font-extrabold text-[#b45309]">50%</div>
+            <p class="font-semibold mt-2">prefiere telefono</p>
+            <p class="text-sm text-slate-600 mt-2">En Mexico, Capterra reporta que el telefono es la primera opcion de atencion para consumidores.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="sesion-cliente" class="bg-white border-y border-slate-200">
+      <div class="max-w-7xl mx-auto px-6 py-16">
+        <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">02 / Insight de sesion inicial</p>
+        <h2 class="section-title text-3xl md:text-5xl font-extrabold mt-3 max-w-5xl">La transformacion no nace de una moda digital; nace de una urgencia operativa para competir en el mercado nacional.</h2>
+        <p class="mt-5 text-slate-600 leading-relaxed max-w-4xl">
+          En la conversacion inicial, Felipe enmarca el reto como un cambio de terreno competitivo: Tokio Marine pasa de atender principalmente cuentas globales japonesas a buscar mayor penetracion en Mexico. En ese "oceano rojo", la experiencia del agente y la predictibilidad operativa se vuelven tan importantes como el producto.
+        </p>
+
+        <div class="mt-10 grid lg:grid-cols-4 gap-5">
+          <div class="card rounded-3xl p-6 print-break">
+            <div class="text-4xl font-extrabold text-[#d71920]">84</div>
+            <p class="font-semibold mt-2">puntos criticos</p>
+            <p class="text-sm text-slate-600 mt-2">El diagnostico interno identifica fricciones operativas que afectan comunicacion, tiempos, datos y experiencia de agentes.</p>
+          </div>
+          <div class="card rounded-3xl p-6 print-break">
+            <div class="text-4xl font-extrabold text-[#2d174d]">Email</div>
+            <p class="font-semibold mt-2">como canal dominante</p>
+            <p class="text-sm text-slate-600 mt-2">Los agentes perciben a la empresa como arcaica por depender del correo y por respuestas inconsistentes.</p>
+          </div>
+          <div class="card rounded-3xl p-6 print-break">
+            <div class="text-4xl font-extrabold text-[#b45309]">Excel</div>
+            <p class="font-semibold mt-2">datos fragmentados</p>
+            <p class="text-sm text-slate-600 mt-2">Multiples bases pequenas y registros manuales dificultan una fuente unica de verdad.</p>
+          </div>
+          <div class="card rounded-3xl p-6 print-break">
+            <div class="text-4xl font-extrabold text-[#0f766e]">FSC</div>
+            <p class="font-semibold mt-2">Salesforce en camino</p>
+            <p class="text-sm text-slate-600 mt-2">Financial Services Cloud inicia con gestion comercial y leads; Genesys puede operar como capa de conversacion y accion.</p>
+          </div>
+        </div>
+
+        <div class="mt-10 grid lg:grid-cols-12 gap-6">
+          <div class="lg:col-span-5 card rounded-3xl p-8 bg-gradient-to-br from-white to-orange-50">
+            <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">Percepcion del broker</p>
+            <h3 class="mt-3 text-2xl md:text-3xl font-extrabold tracking-tight">El problema no es ser lento; es ser impredecible.</h3>
+            <p class="mt-4 text-slate-600 leading-relaxed">
+              La comparacion interna es potente: competidores como GNP o AXA pueden percibirse como lentos, pero predecibles. Tokio Marine, en cambio, aparece como "torbellino" o "laberinto" cuando no hay claridad de tiempos, responsables y siguiente paso.
+            </p>
+          </div>
+          <div class="lg:col-span-7 grid md:grid-cols-2 gap-5">
+            <div class="card rounded-3xl p-6">
+              <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">Pilar 1</p>
+              <h3 class="font-extrabold text-xl mt-2">Modernizacion del core</h3>
+              <p class="text-sm text-slate-600 mt-2">Crear productos de forma agil y reducir rigidez operativa.</p>
+            </div>
+            <div class="card rounded-3xl p-6">
+              <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">Pilar 2</p>
+              <h3 class="font-extrabold text-xl mt-2">Estrategia de datos</h3>
+              <p class="text-sm text-slate-600 mt-2">Centralizar informacion para analitica, reportería y fuente unica de verdad.</p>
+            </div>
+            <div class="card rounded-3xl p-6">
+              <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">Pilar 3</p>
+              <h3 class="font-extrabold text-xl mt-2">CRM / polizas</h3>
+              <p class="text-sm text-slate-600 mt-2">Salesforce Financial Services Cloud como base comercial y de leads.</p>
+            </div>
+            <div class="card rounded-3xl p-6">
+              <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">Pilar 4</p>
+              <h3 class="font-extrabold text-xl mt-2">Omnicanalidad agéntica</h3>
+              <p class="text-sm text-slate-600 mt-2">Microservicios, APIs e IA para eficiencia operativa y experiencia de cliente/agente.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 rounded-3xl bg-[#2d174d] text-white p-8">
+          <p class="text-sm font-bold text-orange-300 uppercase tracking-widest">Implicacion para Genesys</p>
+          <h3 class="mt-3 text-2xl md:text-3xl font-extrabold tracking-tight">La venta interna no debe empezar por una vision larga; debe empezar por casos simples que detengan el sangrado operativo.</h3>
+          <p class="mt-4 text-white/75 leading-relaxed">La narrativa debe mostrar un "dia en la vida" del agente: menos correos, menos persecucion de estatus, menos bases paralelas, mas contexto, SLA visible, trazabilidad y siguiente mejor accion.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white border-y border-slate-200">
+      <div class="max-w-7xl mx-auto px-6 py-16">
+        <div class="grid lg:grid-cols-2 gap-8 items-center">
+          <div>
+            <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">Comportamiento de canales</p>
+            <h2 class="section-title text-3xl md:text-4xl font-extrabold mt-3">En seguros, el canal humano sigue siendo clave cuando hay ansiedad, dinero y riesgo.</h2>
+            <p class="mt-5 text-slate-600 leading-relaxed">
+              El autoservicio puede contener consultas simples, pero en siniestros el asegurado busca certeza: entender el proceso, conocer tiempos, validar documentos, explicar excepciones y tener a alguien que conserve el contexto.
+            </p>
+            <div class="mt-6 grid sm:grid-cols-2 gap-4">
+              <div class="rounded-2xl bg-slate-50 border border-slate-200 p-4">
+                <p class="font-bold">Canal de volumen</p>
+                <p class="text-sm text-slate-600 mt-1">FAQ, portal, documentos, bot, seguimiento y notificaciones.</p>
+              </div>
+              <div class="rounded-2xl bg-slate-50 border border-slate-200 p-4">
+                <p class="font-bold">Canal de confianza</p>
+                <p class="text-sm text-slate-600 mt-1">Voz, chat/WhatsApp y agente con contexto del siniestro.</p>
+              </div>
+            </div>
+          </div>
+          <div class="card rounded-3xl p-6">
+            <canvas id="channelChart" height="260"></canvas>
+            <p class="text-xs text-slate-500 mt-4">Fuente: Capterra Mexico, preferencias de canales de servicio al cliente.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="canales" class="max-w-7xl mx-auto px-6 py-16">
+      <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">03 / Safari de canales visibles</p>
+      <h2 class="section-title text-3xl md:text-5xl font-extrabold mt-3 max-w-5xl">La experiencia visible de Tokio Marine Mexico parece fuerte en operacion, pero limitada en autoservicio conversacional publico.</h2>
+      <p class="mt-5 text-slate-600 leading-relaxed max-w-4xl">
+        La observacion de campo sugiere una experiencia orientada a portales, correos, telefono, UNE, sucursales y documentos. Eso no es debilidad operativa; es una senal de que la siguiente capa de valor puede estar en engagement digital, captura guiada, IA conversacional y orquestacion de casos.
+      </p>
+      <div class="mt-10 overflow-x-auto rounded-3xl border border-slate-200 bg-white">
+        <table class="w-full text-sm min-w-[1050px]">
+          <thead class="bg-slate-100 text-slate-700">
+            <tr>
+              <th class="text-left p-4">Canal / capacidad</th>
+              <th class="text-left p-4">Estado visible Tokio Marine MX</th>
+              <th class="text-left p-4">Lectura CX</th>
+              <th class="text-left p-4">Oportunidad Genesys</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200 text-slate-700">
+            <tr>
+              <td class="p-4 font-bold">Redes sociales</td>
+              <td class="p-4">No se observaron Facebook ni Instagram como canales activos de soporte.</td>
+              <td class="p-4">Menor superficie publica de atencion y social care.</td>
+              <td class="p-4">Incorporar social listening / social care como caso trazable cuando exista presencia activa.</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-bold">Webchat / Web Messaging</td>
+              <td class="p-4">No se observo webchat o bot publico.</td>
+              <td class="p-4">El sitio informa, pero no conversa ni captura intencion.</td>
+              <td class="p-4">Web Messaging con bot, conocimiento y escalamiento contextual.</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-bold">Interaccion proactiva</td>
+              <td class="p-4">No se observaron disparadores predictivos o proactivos en web.</td>
+              <td class="p-4">El usuario debe buscar ayuda; la marca no anticipa friccion.</td>
+              <td class="p-4">Predictive Engagement por comportamiento, abandono, consulta de siniestro o friccion.</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-bold">FAQ / ayuda</td>
+              <td class="p-4">Hay informacion documental, formatos y secciones de siniestros/UNE, pero no una FAQ conversacional visible.</td>
+              <td class="p-4">El conocimiento existe, pero no necesariamente esta activado en cada canal.</td>
+              <td class="p-4">Knowledge base unica para bot, agente, web y copilot.</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-bold">WhatsApp</td>
+              <td class="p-4">No se observo canal publico de WhatsApp.</td>
+              <td class="p-4">Hueco en mensajeria asincrona para siniestros, documentos y seguimiento.</td>
+              <td class="p-4">WhatsApp integrado a Genesys Cloud para intake, seguimiento y notificaciones.</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-bold">App Mexico</td>
+              <td class="p-4">No se observo app especifica de Mexico.</td>
+              <td class="p-4">La experiencia digital depende mas del sitio y portales.</td>
+              <td class="p-4">Priorizar web/mobile messaging antes de app si el caso de negocio es velocidad.</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-bold">Telefonia</td>
+              <td class="p-4">Aviso de privacidad; extension o espera en linea de operadora.</td>
+              <td class="p-4">Voz critica, pero con potencial para intent recognition y routing inteligente.</td>
+              <td class="p-4">Voice Bot, IVR conversacional, screen pop, callback y Agent Copilot.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="journey" class="bg-slate-950 text-white">
+      <div class="max-w-7xl mx-auto px-6 py-16">
+        <p class="text-sm font-bold text-orange-300 uppercase tracking-widest">04 / Journey asegurador</p>
+        <h2 class="section-title text-3xl md:text-5xl font-extrabold mt-3 max-w-5xl">El journey de seguros no se rompe en la venta; se prueba cuando ocurre el siniestro.</h2>
+        <div class="mt-10 grid md:grid-cols-6 gap-4">
+          <div class="journey-step relative bg-white/8 border border-white/10 rounded-3xl p-5">
+            <span class="text-xs font-bold text-orange-300">01</span>
+            <h3 class="font-bold mt-2">Conocer / cotizar</h3>
+            <p class="text-sm text-white/65 mt-2">Cobertura, condiciones, asesor, nicho de mercado.</p>
+          </div>
+          <div class="journey-step relative bg-white/8 border border-white/10 rounded-3xl p-5">
+            <span class="text-xs font-bold text-orange-300">02</span>
+            <h3 class="font-bold mt-2">Contratar / emitir</h3>
+            <p class="text-sm text-white/65 mt-2">Agente, documentos, poliza, pago y validacion.</p>
+          </div>
+          <div class="journey-step relative bg-white/8 border border-white/10 rounded-3xl p-5">
+            <span class="text-xs font-bold text-orange-300">03</span>
+            <h3 class="font-bold mt-2">Administrar poliza</h3>
+            <p class="text-sm text-white/65 mt-2">Endosos, recibos, consultas, renovacion y cambios.</p>
+          </div>
+          <div class="journey-step relative bg-white/8 border border-white/10 rounded-3xl p-5">
+            <span class="text-xs font-bold text-orange-300">04</span>
+            <h3 class="font-bold mt-2">Reportar siniestro</h3>
+            <p class="text-sm text-white/65 mt-2">Cabina, documentos, ajustador, folio, prioridad.</p>
+          </div>
+          <div class="journey-step relative bg-white/8 border border-white/10 rounded-3xl p-5">
+            <span class="text-xs font-bold text-orange-300">05</span>
+            <h3 class="font-bold mt-2">Seguimiento</h3>
+            <p class="text-sm text-white/65 mt-2">Taller, reparacion, indemnizacion, tiempos y explicacion.</p>
+          </div>
+          <div class="journey-step relative bg-white/8 border border-white/10 rounded-3xl p-5">
+            <span class="text-xs font-bold text-orange-300">06</span>
+            <h3 class="font-bold mt-2">Feedback / lealtad</h3>
+            <p class="text-sm text-white/65 mt-2">CSAT, reclamacion, renovacion, recomendacion.</p>
+          </div>
+        </div>
+
+        <div class="mt-10 grid lg:grid-cols-3 gap-6">
+          <div class="bg-white text-slate-900 rounded-3xl p-6 border-t-4 border-t-emerald-700">
+            <h3 class="font-extrabold text-xl">Lo que Tokio Marine ya tiene</h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li>- Marca global y narrativa de calidad japonesa.</li>
+              <li>- Telefonia, UNE, siniestros y correos operativos.</li>
+              <li>- Portales para agentes, ajustadores, pagos y facturas.</li>
+              <li>- Presencia fisica en CDMX, Monterrey, Queretaro y Guadalajara.</li>
+            </ul>
+          </div>
+          <div class="bg-white text-slate-900 rounded-3xl p-6 border-t-4 border-t-amber-700">
+            <h3 class="font-extrabold text-xl">Lo que se observa como brecha</h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li>- Sin webchat/bot publico visible.</li>
+              <li>- Sin WhatsApp publico visible.</li>
+              <li>- Sin capa conversacional sobre documentos y siniestros.</li>
+              <li>- Multiples puertas de entrada con posible handoff manual.</li>
+            </ul>
+          </div>
+          <div class="bg-white text-slate-900 rounded-3xl p-6 border-t-4 border-t-red-700">
+            <h3 class="font-extrabold text-xl">Riesgo CX</h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li>- El asegurado repite informacion entre canales.</li>
+              <li>- El agente opera sin vista unica del journey.</li>
+              <li>- Los tiempos se perciben como silencio operativo.</li>
+              <li>- La confianza se define por excepciones, no por cobertura.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-6 py-16">
+      <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">05 / Voz del cliente publica</p>
+      <h2 class="section-title text-3xl md:text-5xl font-extrabold mt-3 max-w-5xl">La senal transversal del mercado asegurador: el dolor no es solo contactar; es entender que sigue despues del siniestro.</h2>
+      <div class="mt-10 grid lg:grid-cols-4 gap-5">
+        <div class="card rounded-3xl p-6 print-break">
+          <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">Tokio Marine MX</p>
+          <h3 class="text-xl font-extrabold mt-2">Baja huella publica</h3>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">La presencia de rese&ntilde;as mexicanas indexadas es limitada. Trustburn muestra una senal pequena, positiva pero con bajo volumen.</p>
+        </div>
+        <div class="card rounded-3xl p-6 print-break">
+          <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">MAPFRE MX</p>
+          <h3 class="text-xl font-extrabold mt-2">Canales visibles, friccion en siniestros</h3>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">Opiniones mixtas: buena atencion en algunos casos, pero quejas por tiempos de reparacion, claridad y resolucion.</p>
+        </div>
+        <div class="card rounded-3xl p-6 print-break">
+          <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">SURA MX</p>
+          <h3 class="text-xl font-extrabold mt-2">Confianza humana, dolor en call center</h3>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">Rastreator reporta rese&ntilde;as variadas con quejas frecuentes por tramites y problemas de call center.</p>
+        </div>
+        <div class="card rounded-3xl p-6 print-break">
+          <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">Allianz MX</p>
+          <h3 class="text-xl font-extrabold mt-2">Mejor senal reputacional visible</h3>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">eKomi muestra calificacion positiva; las oportunidades se ubican en simplificacion, acceso y explicacion.</p>
+        </div>
+      </div>
+      <div class="mt-8 card rounded-3xl p-8 bg-gradient-to-br from-white to-orange-50">
+        <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">Insight de mercado</p>
+        <h3 class="mt-3 text-2xl md:text-3xl font-extrabold tracking-tight">En autos, CONDUSEF muestra reclamaciones concentradas en negativa de indemnizacion, tiempos de reparacion, tiempos de pago, monto de indemnizacion y reparacion del bien afectado.</h3>
+        <p class="mt-4 text-slate-600 leading-relaxed">Para Tokio Marine Mexico, la oportunidad no es solo habilitar canales: es hacer visible el avance del caso, explicar decisiones y mantener continuidad entre asegurado, agente, ajustador, taller y back office.</p>
+      </div>
+    </section>
+
+    <section id="benchmark" class="bg-white border-y border-slate-200">
+      <div class="max-w-7xl mx-auto px-6 py-16">
+        <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">06 / Benchmark competitivo visible</p>
+        <h2 class="section-title text-3xl md:text-5xl font-extrabold mt-3 max-w-5xl">La competencia ya esta experimentando con mensajeria, bots y formularios, pero todavia hay espacio para una experiencia realmente orquestada.</h2>
+        <div class="mt-10 grid lg:grid-cols-3 gap-6">
+          <div class="card rounded-3xl p-7 print-break">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">Competidor</p>
+                <h3 class="text-2xl font-extrabold mt-2">MAPFRE</h3>
+              </div>
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-100">IA visible</span>
+            </div>
+            <ul class="mt-6 space-y-3 text-sm text-slate-700">
+              <li><b>Web:</b> webchat con IA basado en conocimiento y lenguaje natural.</li>
+              <li><b>WhatsApp:</b> IAnet, mas cercano a IVR digital con informacion generica.</li>
+              <li><b>Voz:</b> IVR clasico con escalamiento a asesor.</li>
+              <li><b>Gap:</b> sin interacciones predictivas; el bot puede quedarse sin respuesta fuera de alcance.</li>
+            </ul>
+          </div>
+          <div class="card rounded-3xl p-7 print-break">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">Competidor</p>
+                <h3 class="text-2xl font-extrabold mt-2">SURA</h3>
+              </div>
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-100">Mensajeria</span>
+            </div>
+            <ul class="mt-6 space-y-3 text-sm text-slate-700">
+              <li><b>Facebook:</b> boton a WhatsApp y asistente virtual con aviso de privacidad.</li>
+              <li><b>Web:</b> sin bot, con boton de contacto, horarios y login.</li>
+              <li><b>WhatsApp:</b> bot con escalamiento a agente, pero ejecucion limitada.</li>
+              <li><b>Gap:</b> experiencia aun poco resolutiva y dependiente de horario/agente.</li>
+            </ul>
+          </div>
+          <div class="card rounded-3xl p-7 print-break">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">Competidor</p>
+                <h3 class="text-2xl font-extrabold mt-2">Allianz</h3>
+              </div>
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-sky-50 text-sky-700 border border-sky-100">Formulario</span>
+            </div>
+            <ul class="mt-6 space-y-3 text-sm text-slate-700">
+              <li><b>Facebook:</b> bot que redirige a formulario de atencion inmediata.</li>
+              <li><b>Web:</b> correos, telefonos y horarios visibles.</li>
+              <li><b>Voz:</b> IVR tradicional con escalamiento a persona.</li>
+              <li><b>Gap:</b> sin chatbot, sin WhatsApp habilitado, sin engagement predictivo.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-10 overflow-x-auto rounded-3xl border border-slate-200 bg-white">
+          <table class="w-full text-sm min-w-[1100px]">
+            <thead class="bg-slate-100 text-slate-700">
+              <tr>
+                <th class="text-left p-4">Capacidad</th>
+                <th class="text-left p-4">Tokio Marine MX</th>
+                <th class="text-left p-4">MAPFRE</th>
+                <th class="text-left p-4">SURA</th>
+                <th class="text-left p-4">Allianz</th>
+                <th class="text-left p-4">Implicacion para Tokio Marine</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 text-slate-700">
+              <tr>
+                <td class="p-4 font-bold">Webchat / bot</td>
+                <td class="p-4">No observado</td>
+                <td class="p-4">Chat con IA</td>
+                <td class="p-4">No observado en web</td>
+                <td class="p-4">No observado</td>
+                <td class="p-4">Espacio para lanzar una experiencia web mas resolutiva que el benchmark.</td>
+              </tr>
+              <tr>
+                <td class="p-4 font-bold">WhatsApp</td>
+                <td class="p-4">No observado</td>
+                <td class="p-4">IAnet + ejecutivo</td>
+                <td class="p-4">Bot con escalamiento</td>
+                <td class="p-4">No habilitado</td>
+                <td class="p-4">Canal prioritario para siniestros, documentos, seguimiento y renovacion.</td>
+              </tr>
+              <tr>
+                <td class="p-4 font-bold">Telefonia</td>
+                <td class="p-4">Operadora / extension</td>
+                <td class="p-4">IVR clasico</td>
+                <td class="p-4">Dependiente de horario</td>
+                <td class="p-4">IVR tradicional</td>
+                <td class="p-4">Voice Bot + intent routing puede diferenciar desde el primer contacto.</td>
+              </tr>
+              <tr>
+                <td class="p-4 font-bold">Predictive engagement</td>
+                <td class="p-4">No observado</td>
+                <td class="p-4">No observado</td>
+                <td class="p-4">No observado</td>
+                <td class="p-4">No observado</td>
+                <td class="p-4">Espacio blanco de diferenciacion: detectar friccion antes de que escale.</td>
+              </tr>
+              <tr>
+                <td class="p-4 font-bold">App con asistente</td>
+                <td class="p-4">No app MX observada</td>
+                <td class="p-4">App sin chatbot</td>
+                <td class="p-4">App sin asistente</td>
+                <td class="p-4">App sin chatbot</td>
+                <td class="p-4">No empezar por app; empezar por canales conversacionales de mayor adopcion.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="brasil" class="max-w-7xl mx-auto px-6 py-16">
+      <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">07 / Benchmark interno regional</p>
+      <h2 class="section-title text-3xl md:text-5xl font-extrabold mt-3 max-w-5xl">Tokio Marine no necesita imaginar el futuro: una referencia de Genesys ya existe dentro del grupo.</h2>
+      <div class="mt-10 grid lg:grid-cols-12 gap-6 items-start">
+        <div class="lg:col-span-5 card rounded-3xl p-8 bg-gradient-to-br from-white to-orange-50">
+          <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">Tokio Marine Brasil</p>
+          <h3 class="mt-3 text-2xl md:text-3xl font-extrabold tracking-tight">Genesys Cloud CX3 como prueba regional de escala, IA y adopcion.</h3>
+          <p class="mt-4 text-slate-600 leading-relaxed">
+            El caso Brasil permite posicionar a Genesys no como apuesta experimental, sino como una plataforma ya validada dentro del ecosistema Tokio Marine para relacionamiento, comercial, operaciones y siniestros.
+          </p>
+        </div>
+        <div class="lg:col-span-7 grid md:grid-cols-3 gap-5">
+          <div class="card rounded-3xl p-6">
+            <div class="text-4xl font-extrabold text-[#2d174d]">1,000</div>
+            <p class="font-semibold mt-2">licencias CX3</p>
+            <p class="text-sm text-slate-600 mt-2">Dato interno para dimensionar escala de adopcion.</p>
+          </div>
+          <div class="card rounded-3xl p-6">
+            <div class="text-4xl font-extrabold text-[#0f766e]">80%</div>
+            <p class="font-semibold mt-2">adopcion</p>
+            <p class="text-sm text-slate-600 mt-2">Uso reportado para operacion regional.</p>
+          </div>
+          <div class="card rounded-3xl p-6">
+            <div class="text-4xl font-extrabold text-[#ff4f1f]">24/7</div>
+            <p class="font-semibold mt-2">asistencia</p>
+            <p class="text-sm text-slate-600 mt-2">Lineas operativas incluyen asistencia 24/7 y trafico.</p>
+          </div>
+          <div class="card rounded-3xl p-6 md:col-span-3">
+            <p class="font-bold">Capacidades y lineas de negocio observadas internamente</p>
+            <p class="mt-3 text-sm text-slate-600 leading-relaxed">Voice Bots IA, WhatsApp, PeopleSoft, Go Live, Siniestros, Cobranza, Atencion Digital, Servicio al Cliente, Ventas, Nuevas Ventas, Renovacion, Encuestas, Calidad, Asistencia 24/7 y Trafico.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="estado-arte" class="bg-slate-950 text-white">
+      <div class="max-w-7xl mx-auto px-6 py-16">
+        <p class="text-sm font-bold text-orange-300 uppercase tracking-widest">08 / Estado del arte con Genesys Cloud</p>
+        <h2 class="section-title text-3xl md:text-5xl font-extrabold mt-3 max-w-5xl">North Star: pasar de un modelo multicanal operativo a una aseguradora orquestada por IA, contexto y confianza.</h2>
+        <p class="mt-5 text-white/70 leading-relaxed max-w-4xl">
+          El estado del arte no es tener un bot aislado. Es lograr que cada conversacion, evento, documento, poliza y siniestro alimente una decision: resolver en autoservicio, escalar con contexto, priorizar por riesgo o activar una accion proactiva. Para Tokio Marine Mexico, la clave es mostrarlo como una secuencia de valor inmediato, no como una promesa lejana.
+        </p>
+
+        <div class="mt-10 grid lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-4 bg-white/8 border border-white/10 rounded-3xl p-7">
+            <p class="text-sm font-bold text-orange-300 uppercase tracking-widest">Ruta pragmatica</p>
+            <h3 class="mt-3 text-2xl font-extrabold">Casos simples para vender internamente</h3>
+            <p class="mt-3 text-sm text-white/70 leading-relaxed">El estado del arte debe aterrizarse como una escalera: primero resolver fricciones visibles de agentes y brokers; despues expandir hacia IA, journey management y automatizacion predictiva.</p>
+          </div>
+          <div class="lg:col-span-8 grid md:grid-cols-2 gap-5">
+            <div class="bg-white text-slate-900 rounded-3xl p-6">
+              <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">Quick win 1</p>
+              <h3 class="font-extrabold text-xl mt-2">Bandeja omnicanal para agentes</h3>
+              <p class="mt-2 text-sm text-slate-600">Sustituir persecucion por correo con conversaciones trazables, motivos, prioridad, SLA y propietario.</p>
+            </div>
+            <div class="bg-white text-slate-900 rounded-3xl p-6">
+              <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">Quick win 2</p>
+              <h3 class="font-extrabold text-xl mt-2">Consulta de estatus sin friccion</h3>
+              <p class="mt-2 text-sm text-slate-600">Bot o agente asistido para polizas, cobranza, emision y siniestros con respuesta consistente desde una base de conocimiento.</p>
+            </div>
+            <div class="bg-white text-slate-900 rounded-3xl p-6">
+              <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">Quick win 3</p>
+              <h3 class="font-extrabold text-xl mt-2">Voice Bot para clasificar y enrutar</h3>
+              <p class="mt-2 text-sm text-slate-600">Reconocer intencion desde la llamada, validar datos basicos y dirigir al equipo correcto sin depender de extension u operadora.</p>
+            </div>
+            <div class="bg-white text-slate-900 rounded-3xl p-6">
+              <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">Quick win 4</p>
+              <h3 class="font-extrabold text-xl mt-2">Copilot para consistencia</h3>
+              <p class="mt-2 text-sm text-slate-600">Resumir interacciones, sugerir respuestas, capturar notas y reducir la variabilidad de atencion entre equipos.</p>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="mt-10 grid lg:grid-cols-12 gap-8 items-start">
+          <div class="lg:col-span-5">
+            <div class="glass rounded-3xl p-7">
+              <p class="text-sm uppercase tracking-widest text-white/60 mb-4">Arquitectura aspiracional</p>
+              <h3 class="text-2xl font-extrabold leading-snug">Canales conversacionales + orquestacion + datos operativos + IA responsable.</h3>
+              <div class="accent-bar my-6"></div>
+              <div class="space-y-4 text-sm text-white/78 leading-relaxed">
+                <p><b>Front door:</b> Web Messaging, WhatsApp, voz, correo y social care como entradas trazables.</p>
+                <p><b>Orquestacion:</b> Genesys Cloud como capa que entiende intencion, identidad, poliza, siniestro, SLA y siguiente accion.</p>
+                <p><b>Integraciones:</b> PeopleSoft, portales, sistemas de polizas, siniestros, pagos, CRM, conocimiento y data lake.</p>
+                <p><b>Inteligencia:</b> Agent Copilot, Virtual Agent, Predictive Routing, Journey Management y Analytics.</p>
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-7 space-y-5">
+            <div class="state-line relative bg-white text-slate-900 rounded-3xl p-6 border border-white/10">
+              <div class="flex gap-4">
+                <div class="w-10 h-10 rounded-2xl bg-orange-50 text-orange-700 grid place-items-center font-extrabold shrink-0">1</div>
+                <div>
+                  <h3 class="font-extrabold text-xl">Digital front door para asegurados y agentes</h3>
+                  <p class="mt-2 text-sm text-slate-600">Un punto de entrada conversacional para consultas, documentos, reportes, estatus, renovaciones y dudas. El canal puede ser web, WhatsApp o voz; la logica debe ser la misma.</p>
+                </div>
+              </div>
+            </div>
+            <div class="state-line relative bg-white text-slate-900 rounded-3xl p-6 border border-white/10">
+              <div class="flex gap-4">
+                <div class="w-10 h-10 rounded-2xl bg-orange-50 text-orange-700 grid place-items-center font-extrabold shrink-0">2</div>
+                <div>
+                  <h3 class="font-extrabold text-xl">Intake inteligente y triage de siniestros</h3>
+                  <p class="mt-2 text-sm text-slate-600">El bot entiende intencion, recopila datos, valida identidad, detecta urgencia, clasifica tipo de siniestro, crea folio y decide si resuelve, agenda callback o enruta.</p>
+                </div>
+              </div>
+            </div>
+            <div class="state-line relative bg-white text-slate-900 rounded-3xl p-6 border border-white/10">
+              <div class="flex gap-4">
+                <div class="w-10 h-10 rounded-2xl bg-orange-50 text-orange-700 grid place-items-center font-extrabold shrink-0">3</div>
+                <div>
+                  <h3 class="font-extrabold text-xl">Claims command center</h3>
+                  <p class="mt-2 text-sm text-slate-600">Journey Management visualiza el recorrido del siniestro: primer aviso, documentos, ajustador, taller, aprobacion, pago, SLA, sentimiento y riesgo reputacional.</p>
+                </div>
+              </div>
+            </div>
+            <div class="state-line relative bg-white text-slate-900 rounded-3xl p-6 border border-white/10">
+              <div class="flex gap-4">
+                <div class="w-10 h-10 rounded-2xl bg-orange-50 text-orange-700 grid place-items-center font-extrabold shrink-0">4</div>
+                <div>
+                  <h3 class="font-extrabold text-xl">Agente aumentado con Copilot</h3>
+                  <p class="mt-2 text-sm text-slate-600">El agente recibe contexto, resumen, razon de contacto, historial, sugerencias de conocimiento, next-best action y notas automaticas para reducir ACW y aumentar consistencia.</p>
+                </div>
+              </div>
+            </div>
+            <div class="state-line relative bg-white text-slate-900 rounded-3xl p-6 border border-white/10">
+              <div class="flex gap-4">
+                <div class="w-10 h-10 rounded-2xl bg-orange-50 text-orange-700 grid place-items-center font-extrabold shrink-0">5</div>
+                <div>
+                  <h3 class="font-extrabold text-xl">IA responsable, analitica y mejora continua</h3>
+                  <p class="mt-2 text-sm text-slate-600">Speech/Text Analytics, calidad, coaching, WEM, prediccion y guardrails permiten gobernar automatizacion sin perder control regulatorio ni confianza humana.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-10 grid lg:grid-cols-3 gap-6">
+          <div class="bg-white/8 border border-white/10 rounded-3xl p-6">
+            <p class="text-sm font-bold text-orange-300 uppercase tracking-widest">Experiencia</p>
+            <h3 class="mt-3 text-xl font-extrabold">Asegurado sin repetir informacion</h3>
+            <p class="mt-3 text-sm text-white/70">La interaccion inicia donde quedo el ultimo evento: poliza, folio, documentos, promesa, SLA y proxima accion.</p>
+          </div>
+          <div class="bg-white/8 border border-white/10 rounded-3xl p-6">
+            <p class="text-sm font-bold text-orange-300 uppercase tracking-widest">Operacion</p>
+            <h3 class="mt-3 text-xl font-extrabold">Menos transferencia, mas FCR</h3>
+            <p class="mt-3 text-sm text-white/70">El enrutamiento entiende intencion, prioridad, valor, riesgo, habilidad y disponibilidad antes de asignar el caso.</p>
+          </div>
+          <div class="bg-white/8 border border-white/10 rounded-3xl p-6">
+            <p class="text-sm font-bold text-orange-300 uppercase tracking-widest">Gestion</p>
+            <h3 class="mt-3 text-xl font-extrabold">Del reporte al insight</h3>
+            <p class="mt-3 text-sm text-white/70">Cada conversacion se convierte en senal de causa raiz: procesos, productos, talleres, tiempos, documentos y canales.</p>
+          </div>
+        </div>
+
+        <div class="mt-10 bg-white text-slate-900 rounded-3xl p-8">
+          <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">Dia en la vida del agente Tokio Marine</p>
+          <h3 class="mt-3 text-2xl md:text-3xl font-extrabold tracking-tight">De perseguir correos a trabajar desde una cola priorizada por intencion, SLA y contexto.</h3>
+          <div class="mt-6 grid md:grid-cols-4 gap-5 text-sm">
+            <div class="rounded-2xl bg-slate-50 border border-slate-200 p-5"><b>1. Entra la solicitud</b><p class="mt-2 text-slate-600">Por voz, WhatsApp, web o correo; Genesys identifica motivo, broker, poliza y urgencia.</p></div>
+            <div class="rounded-2xl bg-slate-50 border border-slate-200 p-5"><b>2. Se crea contexto</b><p class="mt-2 text-slate-600">La conversacion se vincula con Salesforce, datos de poliza, historial y documentos disponibles.</p></div>
+            <div class="rounded-2xl bg-slate-50 border border-slate-200 p-5"><b>3. El agente decide mejor</b><p class="mt-2 text-slate-600">Copilot sugiere respuesta, articulo, resumen, next-best action y datos faltantes.</p></div>
+            <div class="rounded-2xl bg-slate-50 border border-slate-200 p-5"><b>4. Direccion ve la friccion</b><p class="mt-2 text-slate-600">Analytics muestra cuellos de botella en emision, cobranza, siniestros y respuestas a brokers.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-6 py-16">
+      <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">09 / Senales FTS</p>
+      <h2 class="section-title text-3xl md:text-5xl font-extrabold mt-3 max-w-4xl">Lectura consultiva: del sintoma visible a la causa raiz probable.</h2>
+      <div class="mt-10 grid lg:grid-cols-3 gap-6">
+        <div class="card rounded-3xl p-7">
+          <div class="w-12 h-12 rounded-2xl bg-red-50 text-red-700 grid place-items-center font-extrabold">L</div>
+          <h3 class="mt-5 text-xl font-extrabold">Lagging indicators</h3>
+          <p class="mt-3 text-slate-600 text-sm leading-relaxed">Tiempo de resolucion, retrasos en emision/cobranza, reclamaciones, presion por siniestros, seguimiento inconsistente y percepcion de broker como laberinto operativo.</p>
+        </div>
+        <div class="card rounded-3xl p-7">
+          <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-700 grid place-items-center font-extrabold">M</div>
+          <h3 class="mt-5 text-xl font-extrabold">Leaning indicators</h3>
+          <p class="mt-3 text-slate-600 text-sm leading-relaxed">Agente o broker navega entre correo, telefono, UNE, sucursal, Salesforce, Excel y portales. Hay informacion, pero no siempre una ruta guiada ni un responsable visible.</p>
+        </div>
+        <div class="card rounded-3xl p-7">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-700 grid place-items-center font-extrabold">F</div>
+          <h3 class="mt-5 text-xl font-extrabold">Leading indicators</h3>
+          <p class="mt-3 text-slate-600 text-sm leading-relaxed">Dependencia del correo, bases fragmentadas, baja evidencia de autoservicio conversacional, ausencia de WhatsApp publico, sin webchat visible y poca proactividad digital.</p>
+        </div>
+      </div>
+      <div class="mt-8 card rounded-3xl p-8 bg-gradient-to-br from-white to-orange-50">
+        <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">Root cause probable</p>
+        <h3 class="mt-3 text-2xl md:text-3xl font-extrabold tracking-tight">Tokio Marine Mexico parece tener capacidad operativa, pero la experiencia se deteriora cuando la atencion depende de correos, bases paralelas, portales y handoffs sin una fuente unica de verdad ni SLA visible.</h3>
+      </div>
+    </section>
+
+    <section id="oportunidades" class="bg-white border-y border-slate-200">
+      <div class="max-w-7xl mx-auto px-6 py-16">
+        <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">10 / Oportunidades Genesys</p>
+        <h2 class="section-title text-3xl md:text-5xl font-extrabold mt-3 max-w-4xl">Una hoja de ruta por fases para convertir urgencias operativas en casos de uso simples, medibles y escalables.</h2>
+        <div class="mt-9 flex flex-wrap gap-3 no-print">
+          <button class="topic-btn active px-5 py-3 rounded-full border border-slate-300 font-semibold" data-target="p1">Fase 1 / Fortify</button>
+          <button class="topic-btn px-5 py-3 rounded-full border border-slate-300 font-semibold" data-target="p2">Fase 2 / Amplify</button>
+          <button class="topic-btn px-5 py-3 rounded-full border border-slate-300 font-semibold" data-target="p3">Fase 3 / Empower</button>
+          <button class="topic-btn px-5 py-3 rounded-full border border-slate-300 font-semibold" data-target="p4">Fase 4 / Optimize</button>
+        </div>
+
+        <div class="mt-8">
+          <div id="p1" class="topic-panel active card rounded-3xl p-8">
+            <h3 class="text-2xl font-extrabold">Fortify Digital Service</h3>
+            <p class="mt-3 text-slate-600 leading-relaxed">Crear una puerta digital conversacional para dudas frecuentes, estatus de emision/cobranza, siniestros, documentos y contacto inicial de agentes/brokers.</p>
+            <div class="mt-6 grid md:grid-cols-3 gap-5">
+              <div class="rounded-2xl bg-slate-50 p-5 border border-slate-200"><b>Web Messaging</b><p class="text-sm text-slate-600 mt-2">Captura de intencion, guia de requisitos, folio y escalamiento contextual.</p></div>
+              <div class="rounded-2xl bg-slate-50 p-5 border border-slate-200"><b>WhatsApp</b><p class="text-sm text-slate-600 mt-2">Seguimiento asincrono de siniestros, documentos, cobranza, emision y renovaciones.</p></div>
+              <div class="rounded-2xl bg-slate-50 p-5 border border-slate-200"><b>Knowledge base</b><p class="text-sm text-slate-600 mt-2">Una sola fuente para asegurado, agente, broker, bot y asesor.</p></div>
+            </div>
+          </div>
+          <div id="p2" class="topic-panel card rounded-3xl p-8">
+            <h3 class="text-2xl font-extrabold">Amplify Digital Support</h3>
+            <p class="mt-3 text-slate-600 leading-relaxed">Transformar siniestros, reclamos y solicitudes en journeys trazables con folio, SLA e historial omnicanal.</p>
+            <div class="mt-6 grid md:grid-cols-3 gap-5">
+              <div class="rounded-2xl bg-slate-50 p-5 border border-slate-200"><b>Virtual Agent</b><p class="text-sm text-slate-600 mt-2">Intake de siniestro, clasificacion, requisitos y proxima accion.</p></div>
+              <div class="rounded-2xl bg-slate-50 p-5 border border-slate-200"><b>Predictive Routing</b><p class="text-sm text-slate-600 mt-2">Asignacion por intencion, prioridad, habilidad y riesgo.</p></div>
+              <div class="rounded-2xl bg-slate-50 p-5 border border-slate-200"><b>Proactive notifications</b><p class="text-sm text-slate-600 mt-2">Avisos de documento faltante, taller, pago, avance y cierre.</p></div>
+            </div>
+          </div>
+          <div id="p3" class="topic-panel card rounded-3xl p-8">
+            <h3 class="text-2xl font-extrabold">Empower Employees</h3>
+            <p class="mt-3 text-slate-600 leading-relaxed">Dar al agente una vista unica de asegurado, poliza, siniestro, documento, conversacion y proxima mejor accion.</p>
+            <div class="mt-6 grid md:grid-cols-3 gap-5">
+              <div class="rounded-2xl bg-slate-50 p-5 border border-slate-200"><b>Agent Copilot</b><p class="text-sm text-slate-600 mt-2">Resumen, intencion, conocimiento sugerido y next-best action.</p></div>
+              <div class="rounded-2xl bg-slate-50 p-5 border border-slate-200"><b>Agent workspace</b><p class="text-sm text-slate-600 mt-2">Historial omnicanal y datos clave sin alternar herramientas.</p></div>
+              <div class="rounded-2xl bg-slate-50 p-5 border border-slate-200"><b>Quality & coaching</b><p class="text-sm text-slate-600 mt-2">Consistencia, cumplimiento, empatia y cierre de resolucion.</p></div>
+            </div>
+          </div>
+          <div id="p4" class="topic-panel card rounded-3xl p-8">
+            <h3 class="text-2xl font-extrabold">Optimize CX & Operations</h3>
+            <p class="mt-3 text-slate-600 leading-relaxed">Convertir conversaciones y casos en inteligencia para mejorar procesos, productos, talleres, tiempos, canales y experiencia de empleados.</p>
+            <div class="mt-6 grid md:grid-cols-3 gap-5">
+              <div class="rounded-2xl bg-slate-50 p-5 border border-slate-200"><b>Journey Management</b><p class="text-sm text-slate-600 mt-2">Ver donde se acumulan demoras, abandonos y reclamos.</p></div>
+              <div class="rounded-2xl bg-slate-50 p-5 border border-slate-200"><b>Speech/Text Analytics</b><p class="text-sm text-slate-600 mt-2">Temas, sentimiento, causas raiz y cumplimiento.</p></div>
+              <div class="rounded-2xl bg-slate-50 p-5 border border-slate-200"><b>WEM</b><p class="text-sm text-slate-600 mt-2">Forecasting, scheduling, calidad y desempeno conectado al volumen real.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section id="fuentes" class="bg-slate-100 border-t border-slate-200">
+      <div class="max-w-7xl mx-auto px-6 py-16">
+        <p class="text-sm font-bold text-orange-600 uppercase tracking-widest">Fuentes publicas y metodologia</p>
+        <h2 class="section-title text-3xl md:text-4xl font-extrabold mt-3">Base documental para uso compartible</h2>
+        <div class="mt-8 grid md:grid-cols-2 gap-5 text-sm">
+          <div class="card rounded-3xl p-6">
+            <h3 class="font-bold text-lg">Tokio Marine Mexico y grupo</h3>
+            <ul class="mt-3 space-y-2 text-slate-600">
+              <li><a class="source-link" href="https://tokiomarine.com.mx/" target="_blank">Sitio oficial Tokio Marine Mexico</a></li>
+              <li><a class="source-link" href="https://tokiomarine.com.mx/acerca-de-tokio-marine" target="_blank">Acerca de Tokio Marine Mexico</a></li>
+              <li><a class="source-link" href="https://tokiomarine.com.mx/contacto" target="_blank">Contacto y portales visibles</a></li>
+              <li><a class="source-link" href="https://tokiomarine.com.mx/atenci%C3%B3n-al-asegurado" target="_blank">Atencion al asegurado / siniestros</a></li>
+              <li><a class="source-link" href="https://tokiomarine.com.mx/une" target="_blank">UNE Tokio Marine Mexico</a></li>
+              <li><a class="source-link" href="https://www.elasegurador.com.mx/blog/tokio-marine-mexico-marca-un-nuevo-rumbo-con-su-relanzamiento-en-el-pais/" target="_blank">Relanzamiento Tokio Marine Mexico</a></li>
+              <li><a class="source-link" href="https://www.tokiomarinehd.com/en/ir/download/annual_report.html" target="_blank">Tokio Marine Holdings Integrated Annual Report</a></li>
+            </ul>
+          </div>
+          <div class="card rounded-3xl p-6">
+            <h3 class="font-bold text-lg">Tokio Marine Brasil + Genesys</h3>
+            <ul class="mt-3 space-y-2 text-slate-600">
+              <li><a class="source-link" href="https://cqcs.com.br/noticia/tokio-marine-adota-plataforma-genesys-para-aprimorar-atendimento-a-corretores-e-segurados/" target="_blank">CQCS: Tokio Marine adopta plataforma Genesys</a></li>
+              <li><a class="source-link" href="https://www.segs.com.br/seguros/415011-com-foco-na-melhoria-da-experiencia-do-cliente-tokio-marine-comeca-a-utilizar-plataforma-genesys" target="_blank">SEGS: mejora de experiencia de cliente con Genesys</a></li>
+              <li><a class="source-link" href="https://www.genesys.com/capabilities/ai-and-automation" target="_blank">Genesys AI and Automation</a></li>
+              <li><a class="source-link" href="https://www.genesys.com/capabilities/copilots" target="_blank">Genesys Copilots</a></li>
+              <li><a class="source-link" href="https://www.genesys.com/resources/genesys-cloud-agentic-virtual-agent-overview" target="_blank">Genesys Agentic Virtual Agent</a></li>
+            </ul>
+          </div>
+          <div class="card rounded-3xl p-6">
+            <h3 class="font-bold text-lg">Mercado, reclamaciones y preferencias</h3>
+            <ul class="mt-3 space-y-2 text-slate-600">
+              <li><a class="source-link" href="https://www.capterra.mx/blog/3443/estudio-preferencias-y-ventajas-del-servicio-al-cliente-mexico" target="_blank">Capterra Mexico: preferencias de servicio al cliente</a></li>
+              <li><a class="source-link" href="https://www.condusef.gob.mx/?p=cuentas_claras_reclamaciones" target="_blank">CONDUSEF: Cuentas claras en reclamaciones</a></li>
+              <li><a class="source-link" href="https://www.condusef.gob.mx/documentos/rcd/cuentas_claras/cc-ASEGURADORAS-AUTOS-Sept-2024.pdf" target="_blank">CONDUSEF: reclamaciones aseguradoras autos</a></li>
+            </ul>
+          </div>
+          <div class="card rounded-3xl p-6">
+            <h3 class="font-bold text-lg">Resenas y benchmark visible</h3>
+            <ul class="mt-3 space-y-2 text-slate-600">
+              <li><a class="source-link" href="https://trustburn.com/reviews/tokio-marine-compa-a-de-seguros-s-a-de-c-v" target="_blank">Trustburn: Tokio Marine Mexico</a></li>
+              <li><a class="source-link" href="https://www.rastreator.mx/seguros-de-auto/aseguradoras-de-autos/mapfre/opiniones-seguros-mapfre" target="_blank">Rastreator: opiniones MAPFRE Mexico</a></li>
+              <li><a class="source-link" href="https://www.rastreator.mx/seguros-de-auto/aseguradoras-de-autos/seguros-sura/opiniones-y-comentarios-sobre-sura-seguros" target="_blank">Rastreator: opiniones SURA Mexico</a></li>
+              <li><a class="source-link" href="https://www.ekomi.es/testimonios-allianz-mexico.html" target="_blank">eKomi: Allianz Mexico</a></li>
+            </ul>
+          </div>
+        </div>
+        <p class="mt-8 text-xs text-slate-500 leading-relaxed">
+          Nota metodologica: esta pagina sintetiza observaciones de campo, senales publicas, informacion proporcionada por el usuario y fuentes abiertas consultadas al momento de preparacion. El benchmark visible no sustituye datos internos de volumen, SLA, FCR, NPS/CSAT, tasa de abandono, motivos de contacto, adopcion digital o costos de operacion. Debe usarse como hipotesis de descubrimiento consultivo.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-[#081225] text-white">
+    <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between gap-4">
+      <p class="font-bold">CX Safari consultivo / Tokio Marine Mexico</p>
+      <p class="text-white/60 text-sm">Preparado desde la perspectiva de Solution Consulting para conversacion ejecutiva.</p>
+    </div>
+  </footer>
+
+  <script>
+    const buttons = document.querySelectorAll('.topic-btn');
+    const panels = document.querySelectorAll('.topic-panel');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.target).classList.add('active');
+      });
+    });
+
+    const ctx = document.getElementById('channelChart');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Telefono', 'Chat en vivo / WhatsApp', 'Redes sociales', 'Email', 'Chatbot'],
+        datasets: [{
+          label: 'Preferencia de consumidores en Mexico (%)',
+          data: [50, 38, 3, 3, 3],
+          borderWidth: 1,
+          borderRadius: 10,
+          backgroundColor: ['#ff4f1f', '#2d174d', '#184e8e', '#94a3b8', '#cbd5e1']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { beginAtZero: true, max: 60, ticks: { callback: value => value + '%' } },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
